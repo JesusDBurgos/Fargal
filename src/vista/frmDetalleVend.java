@@ -34,6 +34,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
     clsConexion objCon = new clsConexion();
     clsDetalle objDet = new clsDetalle();
     
+    
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
         Object modelotitulos[] = {"Producto", "Cantidad", "Valor productos"};
@@ -135,8 +136,13 @@ public class frmDetalleVend extends javax.swing.JFrame {
         jLabel2.setBounds(60, 40, 141, 22);
 
         btnReg.setText("Regresar");
+        btnReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnReg);
-        btnReg.setBounds(760, 20, 90, 23);
+        btnReg.setBounds(760, 20, 90, 22);
 
         lblFec.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFec.setText(" Fecha:");
@@ -147,7 +153,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
         cboEst.setToolTipText("e");
         cboEst.setEnabled(false);
         jPanel1.add(cboEst);
-        cboEst.setBounds(170, 180, 120, 20);
+        cboEst.setBounds(170, 180, 120, 22);
 
         lblValPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValPed.setText("Valor total:");
@@ -169,6 +175,10 @@ public class frmDetalleVend extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegActionPerformed
 
     /**
      * @param args the command line arguments

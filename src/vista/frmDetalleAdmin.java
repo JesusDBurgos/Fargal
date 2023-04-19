@@ -26,14 +26,18 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         initComponents();    
         this.setLocationRelativeTo(null);
         creartabla();
-        llenarDetalle();
-        llenarTablaDetalle();
     }
     
     DefaultTableModel tabladatos;
     clsConexion objCon = new clsConexion();
     clsDetalle objDet = new clsDetalle();
-    
+ 
+ 
+     public void llamarRegresar() {
+        frmVerPedidosAdmin objIn = new frmVerPedidosAdmin();
+        objIn.setVisible(true);
+        this.setVisible(false);
+    }
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
         Object modelotitulos[] = {"Producto", "Cantidad", "Valor productos"};
@@ -41,6 +45,12 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
         this.tblDetalle.setModel(this.tabladatos);
     }
+    
+    public void setNumeroPedido(String numeroPedido) {
+     lblNumPed.setText(numeroPedido);
+     this.llenarDetalle();
+     this.llenarTablaDetalle();
+}
 
     public void borrartabla() {
         while (0 < this.tblDetalle.getRowCount()) {
@@ -51,23 +61,27 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
     
     public void llenarDetalle(){
         try {
-//                borrartabla();
+  
+                objDet.setOrder(lblNumPed.getText());
                 objDet.llenarDatosDetalle();
-                while (objDet.datos.next() == true) {
-                    lblNumPed.setText(lblNumPed.getText()+"   " +objDet.datos.getString(1));
-                    lblFec.setText(lblFec.getText()+"   " +objDet.datos.getString(2));
+                if (objDet.datos.next() == true) {
+                    //lblNumPed.setText(lblNumPed.getText()+"   " +objDet.datos.getString(1));
+                    lblFec.setText(lblFec.getText()+""+objDet.datos.getString(2));
                     lblNomCli.setText(lblNomCli.getText()+"   " +objDet.datos.getString(3));
                     lblNomVen.setText(lblNomVen.getText()+"   " +objDet.datos.getString(4));
                     cboEst.setSelectedItem(objDet.datos.getString(5));
                     lblValPed.setText(lblValPed.getText()+"   "+objDet.datos.getString(6));
+                }else{
+                JOptionPane.showMessageDialog(null, "No se ha podido buscar, lo siento" );
                 }
             } catch (SQLException ex) {
-                System.out.println("error al llenar la tabla" + ex);
+                JOptionPane.showMessageDialog(null, "No se ha podido mostrar, lo siento" + ex);
             }
     }
     public void llenarTablaDetalle(){
         try {
                 borrartabla();
+                objDet.setOrder(lblNumPed.getText());
                 objDet.llenarTablaDetalle();
                 while (objDet.datos.next() == true) {
                     String Producto = objDet.datos.getString(1);
@@ -88,6 +102,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar el nuevo estado que quiere asignar al pedido");
             }
         else {
+            objDet.setOrder(lblNumPed.getText());
             objDet.setEstado((String) cboEst.getSelectedItem());
             objDet.editarEstado();
         }
@@ -116,6 +131,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         btnMod = new javax.swing.JButton();
         lblEst = new javax.swing.JLabel();
         lblNomCli = new javax.swing.JLabel();
+        lblNumPed1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Detalle de pedido");
@@ -140,9 +156,8 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         jScrollPane1.setBounds(130, 310, 640, 190);
 
         lblNumPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNumPed.setText("N° Pedido:");
         jPanel1.add(lblNumPed);
-        lblNumPed.setBounds(90, 90, 320, 17);
+        lblNumPed.setBounds(170, 90, 70, 17);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Detalle del pedido");
@@ -150,8 +165,13 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         jLabel2.setBounds(60, 40, 141, 22);
 
         btnReg.setText("Regresar");
+        btnReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnReg);
-        btnReg.setBounds(760, 20, 90, 23);
+        btnReg.setBounds(760, 20, 90, 22);
 
         lblNomVen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNomVen.setText("Nombre vendedor:");
@@ -165,7 +185,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
 
         cboEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "APROBADO", "PENDIENTE", "CANCELADO" }));
         jPanel1.add(cboEst);
-        cboEst.setBounds(170, 210, 120, 20);
+        cboEst.setBounds(170, 210, 120, 22);
 
         lblValPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValPed.setText("Valor total:");
@@ -179,7 +199,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMod);
-        btnMod.setBounds(680, 230, 90, 23);
+        btnMod.setBounds(680, 230, 90, 22);
 
         lblEst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEst.setText("Estado:");
@@ -191,6 +211,11 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         jPanel1.add(lblNomCli);
         lblNomCli.setBounds(60, 150, 320, 17);
 
+        lblNumPed1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNumPed1.setText("N° Pedido:");
+        jPanel1.add(lblNumPed1);
+        lblNumPed1.setBounds(90, 90, 70, 17);
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 900, 580);
 
@@ -200,6 +225,10 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
     this.editarEstado();// TODO add your handling code here:
     }//GEN-LAST:event_btnModActionPerformed
+
+    private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
+    this.llamarRegresar();    // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +278,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomCli;
     private javax.swing.JLabel lblNomVen;
     private javax.swing.JLabel lblNumPed;
+    private javax.swing.JLabel lblNumPed1;
     private javax.swing.JLabel lblValPed;
     private javax.swing.JTable tblDetalle;
     // End of variables declaration//GEN-END:variables

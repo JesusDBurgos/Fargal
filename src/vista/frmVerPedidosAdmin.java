@@ -25,6 +25,7 @@ public class frmVerPedidosAdmin extends javax.swing.JFrame {
         this.tablaVerPedidos();
     }
     clsVerPedidos objVp = new clsVerPedidos();
+     frmDetalleAdmin objDet = new frmDetalleAdmin();
     DefaultTableModel tabladatos;
 public String Numero;
 
@@ -33,6 +34,11 @@ public String Numero;
         objIn.setVisible(true);
         this.setVisible(false);
     }
+   /* public void llamarDetalle(){
+    frmDetalleAdmin objDet = new frmDetalleAdmin();
+    objDet.setVisible(true);
+    this.setVisible(false);
+    }*/
 
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
@@ -87,7 +93,7 @@ public String Numero;
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnDetalleAdmin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,7 +133,12 @@ public String Numero;
         });
         jScrollPane1.setViewportView(tblPedidos);
 
-        jButton1.setText("Ver detalle");
+        btnDetalleAdmin.setText("Ver detalle");
+        btnDetalleAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleAdminActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,7 +148,7 @@ public String Numero;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnDetalleAdmin)
                         .addGap(82, 82, 82))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnRegresar)
@@ -160,7 +171,7 @@ public String Numero;
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(btnDetalleAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
@@ -174,9 +185,22 @@ public String Numero;
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void tblPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidosMouseClicked
-     int linea = tblPedidos.getSelectedRow();  
-     
+      int filaSeleccionada = tblPedidos.getSelectedRow();
+        Numero = tblPedidos.getValueAt(filaSeleccionada, 0).toString();
     }//GEN-LAST:event_tblPedidosMouseClicked
+
+    private void btnDetalleAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleAdminActionPerformed
+   if (Numero != null) {
+            // Llamar al método llamarDetalle() y pasar el número de pedido
+           
+            objDet.setNumeroPedido(tblPedidos.getValueAt(tblPedidos.getSelectedRow(), 0).toString());
+            objDet.setVisible(true);
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor seleccione una fila para ver el detalle");
+        }
+       
+    }//GEN-LAST:event_btnDetalleAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,8 +239,8 @@ public String Numero;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDetalleAdmin;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPedidos;
