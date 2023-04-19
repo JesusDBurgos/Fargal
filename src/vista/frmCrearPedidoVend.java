@@ -25,10 +25,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     
     DefaultTableModel tabladatos;
    
-     public boolean isCellEditable(int rowIndex, int vColIndex) {
-            return false;
-        }
-     
+    
     public void llamarRegresar(){
     frmInicioVendedor objIn = new  frmInicioVendedor();
     objIn.setVisible(true);

@@ -5,33 +5,38 @@
  */
 package vista;
 
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.clsVerPedidos;
 
 /**
  *
  * @author Sena CSET
  */
-public class frmVerPedidosVend extends javax.swing.JFrame {
+public class frmVerPedidosAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form frmVerPedidosVend
      */
-    public frmVerPedidosVend() {
+    public frmVerPedidosAdmin() {
         initComponents();
         this.creartabla();
+        this.tablaVerPedidos();
     }
-    
-     DefaultTableModel tabladatos;
-    
-    public void llamarRegresar(){
-    frmInicioVendedor objIn = new  frmInicioVendedor();
-    objIn.setVisible(true);
-    this.setVisible(false);
+    clsVerPedidos objVp = new clsVerPedidos();
+    DefaultTableModel tabladatos;
+public String Numero;
+
+    public void llamarRegresar() {
+        frmInicioVendedor objIn = new frmInicioVendedor();
+        objIn.setVisible(true);
+        this.setVisible(false);
     }
 
-     public void creartabla() {
+    public void creartabla() {
         Object modelodata[][] = new Object[0][0];
-        Object modelotitulos[] = {"N Pedido", "Cliente","Cantidad", "Precio Total", "Estado"," Fecha","Ver detalle"};
+        Object modelotitulos[] = {"Pedido", "Vendedor", "Cliente", "Cantidad", "Precio Total", "Estado", " Fecha"};
         tabladatos = new DefaultTableModel();
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
 
@@ -44,7 +49,31 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
             this.creartabla();
         }
     }
-    
+
+    public void tablaVerPedidos() {
+        String Pedido;
+        
+        try {
+            this.borrartabla();
+            objVp.VerPedidosAdmin();
+            while (objVp.datos.next() == true) {
+                Pedido = objVp.datos.getString(1);
+                String Vendedor = objVp.datos.getString(3);
+                String Cliente = objVp.datos.getString(4);
+                String Cantidad = objVp.datos.getString(2);
+                String Precio = objVp.datos.getString(5);
+                String Estado = objVp.datos.getString(6);
+                String Fecha = objVp.datos.getString(7);
+
+                Object fila[] = {Pedido, Vendedor, Cliente,Cantidad,Precio,Estado,Fecha};
+                tabladatos.addRow(fila);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido mostrar, lo siento" + e);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,6 +87,7 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +99,7 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Mis Pedidos");
+        jLabel1.setText("Pedidos");
 
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,18 +109,25 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "N pedido", "Cliente", "Cantidad", "Precio  Total", "Estado", "Fecha", "Ver detalle"
+                "N pedido", "Vendedor", "Cliente", "Cantidad", "Precio  Total", "Estado", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPedidosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPedidos);
+
+        jButton1.setText("Ver detalle");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,28 +135,35 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegresar)
-                .addGap(53, 53, 53))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnRegresar)
+                        .addGap(111, 111, 111))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(448, 448, 448)
+                        .addGap(536, 536, 536)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(26, 26, 26)
                 .addComponent(btnRegresar)
-                .addGap(4, 4, 4)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addGap(67, 67, 67))
         );
 
         pack();
@@ -128,6 +172,11 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.llamarRegresar();    // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void tblPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPedidosMouseClicked
+     int linea = tblPedidos.getSelectedRow();  
+     
+    }//GEN-LAST:event_tblPedidosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -146,26 +195,28 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVerPedidosVend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVerPedidosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVerPedidosVend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVerPedidosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVerPedidosVend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVerPedidosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVerPedidosVend.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVerPedidosAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVerPedidosVend().setVisible(true);
+                new frmVerPedidosAdmin().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPedidos;
