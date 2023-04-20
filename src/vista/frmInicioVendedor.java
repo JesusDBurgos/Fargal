@@ -40,7 +40,7 @@ public class frmInicioVendedor extends javax.swing.JFrame {
     }
     
     public void irConsultarPedido(){
-        frmVerPedidosVend irConsultarPedido = new frmVerPedidosVend();
+        frmVerPedidosAdmin irConsultarPedido = new frmVerPedidosAdmin();
         irConsultarPedido.setVisible(true);
         this.setVisible(false);
     }
@@ -85,7 +85,7 @@ public class frmInicioVendedor extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(58, 155, 220));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Untitled (1).png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         jButton1.setText("  Consultar pedido");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +110,7 @@ public class frmInicioVendedor extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(58, 155, 220));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Untitled.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lapiz.png"))); // NOI18N
         jButton3.setText("  Crear pedido");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +135,7 @@ public class frmInicioVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        this.irCrearPedido();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

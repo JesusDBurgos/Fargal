@@ -63,7 +63,7 @@ public String Numero;
         
         try {
             this.borrartabla();
-            objVp.VerPedidosAdmin();
+            objVp.VerPedidosVendedor();
             while (objVp.datos.next() == true) {
                 Pedido = objVp.datos.getString(1);
                 String Vendedor = objVp.datos.getString(3);

@@ -68,7 +68,9 @@ public class clsUsuario {
     public void login(){
         try {
             conexion.conectar();
-            conexion.sql=conexion.con.prepareStatement("SELECT name FROM udemy_delivery.users WHERE zone = ? AND password2 = ? ");
+            conexion.sql=conexion.con.prepareStatement("SELECT id, name "
+                                                        + "FROM udemy_delivery.users "
+                                                        + "WHERE zone = ? AND password2 = ? ");
             conexion.sql.setString(1,getZona());
             conexion.sql.setString(2,getContrasena());
             conexion.sql.executeQuery();

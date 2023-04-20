@@ -5,8 +5,10 @@
  */
 package vista;
 
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.clsCrearPedidos;
 
 /**
  *
@@ -21,20 +23,24 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.creartabla();
-    
+        this.llenarCliente();
+
     }
+    clsCrearPedidos create = new clsCrearPedidos();
     
+    String id_product;
+
     DefaultTableModel tabladatos;
-   
-    
-    public void llamarRegresar(){
-    frmInicioVendedor objIn = new  frmInicioVendedor();
-    objIn.setVisible(true);
-    this.setVisible(false);
+
+    public void llamarRegresar() {
+        frmInicioVendedor objIn = new frmInicioVendedor();
+        objIn.setVisible(true);
+        this.setVisible(false);
     }
-   public void creartabla() {
+
+    public void creartabla() {
         Object modelodata[][] = new Object[0][0];
-        Object modelotitulos[] = {"N° Producto","Producto", "Cantidad", "Precio Unitario", "Precio Total"};
+        Object modelotitulos[] = {"N° Producto", "Producto", "Cantidad", "Precio Unitario", "Precio Total"};
         tabladatos = new DefaultTableModel();
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
 
@@ -47,36 +53,84 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
             this.creartabla();
         }
     }
+
     
-    public void agregarFila(){ 
-            Object [] fila=new Object[5]; 
-              fila[0]="n bd";
-              fila[1]=cboProducto.getSelectedItem().toString();
-              fila[2]=spnCantidad.getValue().toString();
-              fila[3]="bd";
-              fila[4]="bd";
-              tabladatos.addRow(fila); 
-             //combinar metodo llenar tabla para traer los precios
+    public void agregarFila() {
+        try {
+            //this.borrartabla();
+            create.setProductoSelecccionado(cboProducto.getSelectedItem().toString());
+            create.Buscar_Id_Precio_Product();
+            while (create.datos.next() == true) {
+                Object[] fila = new Object[5];
+                fila[0] = create.datos.getString(1);
+                fila[1] = cboProducto.getSelectedItem().toString();
+                fila[2] = spnCantidad.getValue().toString();
+                fila[3] = create.datos.getString(3);
+                fila[4] = "bd";
+                tabladatos.addRow(fila);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se ha podido mostrar, lo siento" + e);
+        }
+    }
+
+    public void borrarFila() {
+        int a = tblProductos.getSelectedRow();
+        if (a < 0) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Debe seleccionar una fila de la tabla");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Registro Eliminado");
+            tabladatos.removeRow(a);
+        }
+    }
+
+    public void limpiar() {
+        cboMarca.setSelectedIndex(0);
+        cboProducto.removeAllItems();
+        cboProducto.setSelectedIndex(0);
+        spnCantidad.setValue(0);
     }
     
-    public void borrarFila(){
-            int a = tblProductos.getSelectedRow(); 
-          if (a<0){ 
- 
-                JOptionPane.showMessageDialog(null, 
-                "Debe seleccionar una fila de la tabla" ); 
- 
-         }else {
-                JOptionPane.showMessageDialog(null,"Registro Eliminado" );
-                 tabladatos.removeRow(a); 
-          }
+    public void llenarProducto() {
+        try {
+           // create.setMarca(cboMarca.getSelectedItem().toString());
+            create.VerProductos();
+            while (create.datos.next() == true) {
+                cboProducto.addItem(create.datos.getString(2));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error " + e);
+        }
     }
     
-  
-    public void limpiar(){
-    cboMarca.setSelectedItem(0);
-    cboProducto.setSelectedItem(0);
-    spnCantidad.setValue(0);
+     public void llenarCliente() {
+        try {
+           // create.setMarca(cboMarca.getSelectedItem().toString());
+            create.VerClientesXVendedor();
+            while (create.datos.next() == true) {
+                cboCliente.addItem(create.datos.getString(2));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error " + e);
+        }
+    }
+    
+    public void Buscar_Id_Precio_Producto() {
+        try {
+            create.setProductoSelecccionado(cboProducto.getSelectedItem().toString()); 
+            create.Buscar_Id_Precio_Product();
+            
+            if(create.datos.next() == true) {
+                cboProducto.addItem(create.datos.getString(1));
+            }
+            
+        }catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error " + e);
+        }
     }
 
     /**
@@ -127,31 +181,36 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
         cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         jPanel1.add(cboCliente);
-        cboCliente.setBounds(126, 122, 122, 20);
+        cboCliente.setBounds(126, 122, 122, 22);
 
         jLabel3.setText("Nuevo Producto :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(85, 180, 100, 14);
+        jLabel3.setBounds(85, 180, 100, 16);
 
         jLabel4.setText("Marca :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(180, 210, 50, 14);
+        jLabel4.setBounds(180, 210, 50, 16);
 
         jLabel5.setText("Producto :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(370, 210, 60, 14);
+        jLabel5.setBounds(370, 210, 60, 16);
 
         jLabel6.setText("Cantidad :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(580, 210, 60, 14);
+        jLabel6.setBounds(580, 210, 60, 16);
 
         cboMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "narbatt", "pioneiro" }));
+        cboMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboMarcaActionPerformed(evt);
+            }
+        });
         jPanel1.add(cboMarca);
-        cboMarca.setBounds(240, 210, 110, 20);
+        cboMarca.setBounds(240, 210, 110, 22);
 
         cboProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "bateria 1", "bateria 2", "bateria 3" }));
         jPanel1.add(cboProducto);
-        cboProducto.setBounds(440, 210, 110, 20);
+        cboProducto.setBounds(440, 210, 110, 22);
 
         btnAñadir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnAñadir.setForeground(new java.awt.Color(58, 155, 220));
@@ -218,7 +277,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegresar);
-        btnRegresar.setBounds(930, 30, 93, 32);
+        btnRegresar.setBounds(930, 30, 90, 32);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 0, 51));
@@ -233,7 +292,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
         jLabel8.setText("N° Pedido :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(427, 125, 180, 14);
+        jLabel8.setBounds(427, 125, 180, 16);
         jPanel1.add(lblNumeroPedido);
         lblNumeroPedido.setBounds(487, 122, 62, 20);
 
@@ -253,6 +312,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
     this.agregarFila();// TODO add your handling code here:
+    this.limpiar();
     }//GEN-LAST:event_btnAñadirActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -267,6 +327,16 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void cboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMarcaActionPerformed
+         if(cboMarca.getSelectedIndex() == 1){
+           create.setMarca("NARBATT");
+           this.llenarProducto();
+       } else{
+           create.setMarca("PIONEIRO");
+           this.llenarProducto();
+       }
+    }//GEN-LAST:event_cboMarcaActionPerformed
 
     /**
      * @param args the command line arguments

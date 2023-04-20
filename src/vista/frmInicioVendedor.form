@@ -73,7 +73,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/Untitled (1).png"/>
+              <Image iconType="3" name="/imagenes/lupa.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  Consultar pedido"/>
           </Properties>
@@ -120,7 +120,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/Untitled.png"/>
+              <Image iconType="3" name="/imagenes/lapiz.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="  Crear pedido"/>
           </Properties>

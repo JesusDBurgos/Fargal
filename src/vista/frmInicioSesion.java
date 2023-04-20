@@ -5,7 +5,6 @@
  */
 package vista;
 
-import controlador.clsConexion;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.clsSession;
@@ -25,9 +24,10 @@ public class frmInicioSesion extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-   clsUsuario user = new clsUsuario();
+    clsUsuario user = new clsUsuario();
    
    String usuario;
+   String id_usuario;
    
    public void login(){
        try{         
@@ -37,12 +37,20 @@ public class frmInicioSesion extends javax.swing.JFrame {
             
             if(user.datos.next() == true){
                
-                usuario = user.datos.getString(1);
+                
+                id_usuario = user.datos.getString(1);
+                usuario = user.datos.getString(2);
                 
                 clsSession session = clsSession.getInstance();
-                session.setData(usuario);
+                session.setId_usuario(id_usuario);
+                session.setData(usuario);//id_usuario
+                
                 JOptionPane.showMessageDialog(null, "Usuario autenticado");
                 this.irPedidos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Datos incorrectos, intentelo de nuevo");
+                txtUsuario.setText("");
+                txtContraseña.setText("");
             }
 
        }catch(SQLException e){

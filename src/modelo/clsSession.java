@@ -12,6 +12,15 @@ public class clsSession {
   private static clsSession instance;
     private String data;
 
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+    private String id_usuario;
+
     private clsSession() {}
 
     public static clsSession getInstance() {
