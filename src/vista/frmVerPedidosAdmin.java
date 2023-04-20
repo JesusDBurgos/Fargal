@@ -32,6 +32,7 @@ public String Numero;
     public void llamarRegresar() {
         frmInicioVendedor objIn = new frmInicioVendedor();
         objIn.setVisible(true);
+        //dfd
         this.setVisible(false);
     }
    /* public void llamarDetalle(){
