@@ -90,23 +90,30 @@ public String Numero;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRegresar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnDetalleAdmin = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPedidos = new javax.swing.JTable();
-        btnDetalleAdmin = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1200, 670));
+        setSize(new java.awt.Dimension(1200, 670));
+        getContentPane().setLayout(null);
 
-        btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+
+        btnDetalleAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDetalleAdmin.setText("Ver detalle");
+        btnDetalleAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
+                btnDetalleAdminActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Pedidos");
+        jPanel1.add(btnDetalleAdmin);
+        btnDetalleAdmin.setBounds(1030, 120, 100, 30);
 
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,49 +141,26 @@ public String Numero;
         });
         jScrollPane1.setViewportView(tblPedidos);
 
-        btnDetalleAdmin.setText("Ver detalle");
-        btnDetalleAdmin.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(40, 180, 1114, 360);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
+        jLabel1.setText("Pedidos");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(530, 70, 100, 32);
+
+        btnRegresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalleAdminActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnRegresar);
+        btnRegresar.setBounds(1070, 20, 90, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnDetalleAdmin)
-                        .addGap(82, 82, 82))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRegresar)
-                        .addGap(111, 111, 111))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(536, 536, 536)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnRegresar)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(btnDetalleAdmin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
-        );
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 1200, 670);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -243,6 +227,7 @@ public String Numero;
     private javax.swing.JButton btnDetalleAdmin;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPedidos;
     // End of variables declaration//GEN-END:variables

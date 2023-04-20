@@ -61,7 +61,7 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1055, 670));
+        setMinimumSize(new java.awt.Dimension(1060, 670));
         setPreferredSize(new java.awt.Dimension(1060, 670));
         getContentPane().setLayout(null);
 
@@ -91,12 +91,12 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPedidos);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(71, 169, 912, 402);
+        jScrollPane1.setBounds(71, 169, 912, 380);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         jLabel1.setText("Mis Pedidos");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(448, 60, 124, 29);
+        jLabel1.setBounds(448, 60, 140, 32);
 
         btnRegresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRegresar.setText("Regresar");

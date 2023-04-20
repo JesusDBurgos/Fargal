@@ -87,6 +87,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cboCliente = new javax.swing.JComboBox<>();
@@ -109,33 +110,60 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
         btnEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1051, 663));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Crear nuevo pedido");
+        jLabel1.setText("Nuevo pedido");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(430, 40, 160, 29);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Cliente :");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(46, 122, 49, 17);
 
         cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        jPanel1.add(cboCliente);
+        cboCliente.setBounds(126, 122, 122, 20);
 
         jLabel3.setText("Nuevo Producto :");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(85, 180, 100, 14);
 
         jLabel4.setText("Marca :");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(200, 210, 50, 14);
 
         jLabel5.setText("Producto :");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(390, 210, 60, 14);
 
         jLabel6.setText("Cantidad :");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(600, 210, 60, 14);
 
         cboMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "narbatt", "pioneiro" }));
+        jPanel1.add(cboMarca);
+        cboMarca.setBounds(260, 210, 110, 20);
 
         cboProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "bateria 1", "bateria 2", "bateria 3" }));
+        jPanel1.add(cboProducto);
+        cboProducto.setBounds(460, 210, 110, 20);
 
+        btnAñadir.setBackground(new java.awt.Color(58, 155, 220));
+        btnAñadir.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnAñadir.setForeground(new java.awt.Color(255, 255, 255));
         btnAñadir.setText("Añadir");
         btnAñadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAñadirActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAñadir);
+        btnAñadir.setBounds(894, 206, 76, 32);
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,137 +186,80 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblProductos);
 
-        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(160, 303, 730, 260);
+
+        btnGuardar.setBackground(new java.awt.Color(58, 155, 220));
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("Realizar Pedido");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar);
+        btnGuardar.setBounds(860, 600, 140, 32);
 
         jLabel7.setText("Precio");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(750, 210, 107, 17);
 
         spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jPanel1.add(spnCantidad);
+        spnCantidad.setBounds(670, 210, 59, 24);
 
+        btnRegresar.setBackground(new java.awt.Color(255, 89, 89));
+        btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnRegresar);
+        btnRegresar.setBounds(928, 38, 93, 32);
 
-        btnEliminar.setText("eliminar");
+        btnEliminar.setBackground(new java.awt.Color(255, 89, 89));
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
+        jPanel1.add(btnEliminar);
+        btnEliminar.setBounds(930, 340, 81, 32);
 
         jLabel8.setText("N° Pedido :");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(427, 125, 180, 14);
+        jPanel1.add(lblNumeroPedido);
+        lblNumeroPedido.setBounds(487, 122, 62, 20);
 
-        btnEliminar1.setText("editar");
+        btnEliminar1.setBackground(new java.awt.Color(58, 155, 220));
+        btnEliminar1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar1.setText("Editar");
         btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminar1ActionPerformed(evt);
             }
         });
+        jPanel1.add(btnEliminar1);
+        btnEliminar1.setBounds(930, 390, 80, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel2)
-                                .addGap(31, 31, 31)
-                                .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(179, 179, 179)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNumeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(212, 212, 212)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel5)
-                                .addGap(4, 4, 4)
-                                .addComponent(cboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresar)))
-                .addGap(46, 46, 46))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel8)
-                                .addComponent(lblNumeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel3))
-                    .addComponent(btnRegresar))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cboMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAñadir)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(spnCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addComponent(btnEliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -310,6 +281,10 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,6 +338,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumeroPedido;
     private javax.swing.JSpinner spnCantidad;
