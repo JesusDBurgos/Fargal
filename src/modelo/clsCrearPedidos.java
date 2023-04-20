@@ -223,6 +223,7 @@ public class clsCrearPedidos {
             objCon.sql.setString(1,getProductoSelecccionado());
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet(); 
+            
         } catch (SQLException e) {
         }
     }

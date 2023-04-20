@@ -135,12 +135,13 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
                 <StringItem index="0" value="Seleccionar..."/>
-                <StringItem index="1" value="narbatt"/>
-                <StringItem index="2" value="pioneiro"/>
+                <StringItem index="1" value="NARBATT"/>
+                <StringItem index="2" value="PIONEIRO"/>
               </StringArray>
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboMarcaItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboMarcaActionPerformed"/>
           </Events>
           <AuxValues>
@@ -155,11 +156,8 @@
         <Component class="javax.swing.JComboBox" name="cboProducto">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="1">
                 <StringItem index="0" value="Seleccionar..."/>
-                <StringItem index="1" value="bateria 1"/>
-                <StringItem index="2" value="bateria 2"/>
-                <StringItem index="3" value="bateria 3"/>
               </StringArray>
             </Property>
           </Properties>
