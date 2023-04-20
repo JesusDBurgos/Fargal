@@ -19,6 +19,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
      */
     public frmCrearPedidoVend() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.creartabla();
     
     }
@@ -107,7 +108,6 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         lblNumeroPedido = new javax.swing.JLabel();
-        btnEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1051, 663));
@@ -135,35 +135,34 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
         jLabel4.setText("Marca :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(200, 210, 50, 14);
+        jLabel4.setBounds(180, 210, 50, 14);
 
         jLabel5.setText("Producto :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(390, 210, 60, 14);
+        jLabel5.setBounds(370, 210, 60, 14);
 
         jLabel6.setText("Cantidad :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(600, 210, 60, 14);
+        jLabel6.setBounds(580, 210, 60, 14);
 
         cboMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "narbatt", "pioneiro" }));
         jPanel1.add(cboMarca);
-        cboMarca.setBounds(260, 210, 110, 20);
+        cboMarca.setBounds(240, 210, 110, 20);
 
         cboProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "bateria 1", "bateria 2", "bateria 3" }));
         jPanel1.add(cboProducto);
-        cboProducto.setBounds(460, 210, 110, 20);
+        cboProducto.setBounds(440, 210, 110, 20);
 
-        btnAñadir.setBackground(new java.awt.Color(58, 155, 220));
-        btnAñadir.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        btnAñadir.setForeground(new java.awt.Color(255, 255, 255));
-        btnAñadir.setText("Añadir");
+        btnAñadir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        btnAñadir.setForeground(new java.awt.Color(58, 155, 220));
+        btnAñadir.setText("+");
         btnAñadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAñadirActionPerformed(evt);
             }
         });
         jPanel1.add(btnAñadir);
-        btnAñadir.setBounds(894, 206, 76, 32);
+        btnAñadir.setBounds(870, 200, 60, 35);
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -203,11 +202,11 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
         jLabel7.setText("Precio");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(750, 210, 107, 17);
+        jLabel7.setBounds(730, 210, 107, 17);
 
         spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jPanel1.add(spnCantidad);
-        spnCantidad.setBounds(670, 210, 59, 24);
+        spnCantidad.setBounds(650, 210, 59, 24);
 
         btnRegresar.setBackground(new java.awt.Color(255, 89, 89));
         btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -219,37 +218,24 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegresar);
-        btnRegresar.setBounds(928, 38, 93, 32);
+        btnRegresar.setBounds(930, 30, 93, 32);
 
-        btnEliminar.setBackground(new java.awt.Color(255, 89, 89));
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 0, 51));
+        btnEliminar.setText("-");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
         jPanel1.add(btnEliminar);
-        btnEliminar.setBounds(930, 340, 81, 32);
+        btnEliminar.setBounds(940, 200, 60, 35);
 
         jLabel8.setText("N° Pedido :");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(427, 125, 180, 14);
         jPanel1.add(lblNumeroPedido);
         lblNumeroPedido.setBounds(487, 122, 62, 20);
-
-        btnEliminar1.setBackground(new java.awt.Color(58, 155, 220));
-        btnEliminar1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setText("Editar");
-        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar1);
-        btnEliminar1.setBounds(930, 390, 80, 32);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,10 +263,6 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     this.borrarFila(); 
     this.limpiar();
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
@@ -324,7 +306,6 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cboCliente;

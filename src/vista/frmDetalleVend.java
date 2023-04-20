@@ -135,6 +135,9 @@ public class frmDetalleVend extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(60, 40, 141, 22);
 
+        btnReg.setBackground(new java.awt.Color(255, 89, 89));
+        btnReg.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnReg.setForeground(new java.awt.Color(255, 255, 255));
         btnReg.setText("Regresar");
         btnReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +145,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnReg);
-        btnReg.setBounds(760, 20, 90, 22);
+        btnReg.setBounds(760, 20, 93, 32);
 
         lblFec.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFec.setText(" Fecha:");
@@ -153,7 +156,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
         cboEst.setToolTipText("e");
         cboEst.setEnabled(false);
         jPanel1.add(cboEst);
-        cboEst.setBounds(170, 180, 120, 22);
+        cboEst.setBounds(170, 180, 120, 20);
 
         lblValPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValPed.setText("Valor total:");

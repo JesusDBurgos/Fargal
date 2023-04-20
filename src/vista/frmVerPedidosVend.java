@@ -18,6 +18,7 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
      */
     public frmVerPedidosVend() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.creartabla();
     }
     
@@ -98,7 +99,9 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(448, 60, 140, 32);
 
-        btnRegresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRegresar.setBackground(new java.awt.Color(255, 89, 89));
+        btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +109,7 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegresar);
-        btnRegresar.setBounds(930, 20, 87, 25);
+        btnRegresar.setBounds(930, 20, 93, 32);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1060, 670);

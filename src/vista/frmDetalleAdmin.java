@@ -66,7 +66,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                 objDet.llenarDatosDetalle();
                 if (objDet.datos.next() == true) {
                     //lblNumPed.setText(lblNumPed.getText()+"   " +objDet.datos.getString(1));
-                    lblFec.setText(lblFec.getText()+""+objDet.datos.getString(2));
+                    lblFec.setText(lblFec.getText()+"  "+objDet.datos.getString(2));
                     lblNomCli.setText(lblNomCli.getText()+"   " +objDet.datos.getString(3));
                     lblNomVen.setText(lblNomVen.getText()+"   " +objDet.datos.getString(4));
                     cboEst.setSelectedItem(objDet.datos.getString(5));
@@ -164,6 +164,9 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(60, 40, 141, 22);
 
+        btnReg.setBackground(new java.awt.Color(255, 89, 89));
+        btnReg.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnReg.setForeground(new java.awt.Color(255, 255, 255));
         btnReg.setText("Regresar");
         btnReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +174,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnReg);
-        btnReg.setBounds(760, 20, 90, 22);
+        btnReg.setBounds(760, 20, 93, 32);
 
         lblNomVen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNomVen.setText("Nombre vendedor:");
@@ -185,13 +188,16 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
 
         cboEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "APROBADO", "PENDIENTE", "CANCELADO" }));
         jPanel1.add(cboEst);
-        cboEst.setBounds(170, 210, 120, 22);
+        cboEst.setBounds(170, 210, 120, 20);
 
         lblValPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValPed.setText("Valor total:");
         jPanel1.add(lblValPed);
         lblValPed.setBounds(90, 240, 270, 17);
 
+        btnMod.setBackground(new java.awt.Color(58, 155, 220));
+        btnMod.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnMod.setForeground(new java.awt.Color(255, 255, 255));
         btnMod.setText("Modificar");
         btnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +205,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMod);
-        btnMod.setBounds(680, 230, 90, 22);
+        btnMod.setBounds(680, 230, 93, 32);
 
         lblEst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEst.setText("Estado:");

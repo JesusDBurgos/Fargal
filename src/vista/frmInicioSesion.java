@@ -22,6 +22,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
      */
     public frmInicioSesion() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
    clsUsuario user = new clsUsuario();

@@ -21,6 +21,7 @@ public class frmVerPedidosAdmin extends javax.swing.JFrame {
      */
     public frmVerPedidosAdmin() {
         initComponents();
+        this.setLocationRelativeTo(null);
         this.creartabla();
         this.tablaVerPedidos();
     }
@@ -105,7 +106,9 @@ public String Numero;
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        btnDetalleAdmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDetalleAdmin.setBackground(new java.awt.Color(58, 155, 220));
+        btnDetalleAdmin.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnDetalleAdmin.setForeground(new java.awt.Color(255, 255, 255));
         btnDetalleAdmin.setText("Ver detalle");
         btnDetalleAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +116,7 @@ public String Numero;
             }
         });
         jPanel1.add(btnDetalleAdmin);
-        btnDetalleAdmin.setBounds(1030, 120, 100, 30);
+        btnDetalleAdmin.setBounds(1040, 120, 105, 32);
 
         tblPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -149,7 +152,9 @@ public String Numero;
         jPanel1.add(jLabel1);
         jLabel1.setBounds(530, 70, 100, 32);
 
-        btnRegresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRegresar.setBackground(new java.awt.Color(255, 89, 89));
+        btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +162,7 @@ public String Numero;
             }
         });
         jPanel1.add(btnRegresar);
-        btnRegresar.setBounds(1070, 20, 90, 30);
+        btnRegresar.setBounds(1080, 20, 93, 32);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1200, 670);
