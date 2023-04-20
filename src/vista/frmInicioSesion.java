@@ -106,7 +106,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         txtUsuario.setBounds(440, 270, 140, 27);
 
         btnIngresar.setBackground(new java.awt.Color(58, 155, 220));
-        btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        btnIngresar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         btnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnIngresar);
-        btnIngresar.setBounds(440, 400, 100, 30);
+        btnIngresar.setBounds(430, 400, 110, 35);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

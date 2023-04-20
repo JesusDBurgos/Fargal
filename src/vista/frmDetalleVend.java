@@ -2,6 +2,7 @@ package vista;
 
 import controlador.clsConexion;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsDetalle;
@@ -33,11 +34,12 @@ public class frmDetalleVend extends javax.swing.JFrame {
     DefaultTableModel tabladatos;
     clsConexion objCon = new clsConexion();
     clsDetalle objDet = new clsDetalle();
+    DecimalFormat formato = new DecimalFormat("#,##0");
     
     
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
-        Object modelotitulos[] = {"Producto", "Cantidad", "Valor productos"};
+        Object modelotitulos[] = {"Producto", "Cantidad", "Valor"};
         tabladatos = new DefaultTableModel();
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
         this.tblDetalle.setModel(this.tabladatos);
@@ -48,6 +50,12 @@ public class frmDetalleVend extends javax.swing.JFrame {
             tblDetalle.setModel(new DefaultTableModel());
             this.creartabla();
         }
+    }
+    
+    public void llamarRegresar() {
+        frmVerPedidosVend regresar = new frmVerPedidosVend();
+        regresar.setVisible(true);
+        this.setVisible(false);
     }
     
     public void llenarDetalle(){
@@ -72,7 +80,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
                 while (objDet.datos.next() == true) {
                     String Producto = objDet.datos.getString(1);
                     String Cantidad = objDet.datos.getString(2);
-                    String ValorProductos = objDet.datos.getString(3);
+                    String ValorProductos = formato.format(Integer.parseInt(objDet.datos.getString(3)));
                     Object fila[] = {Producto,Cantidad, ValorProductos};
                     tabladatos.addRow(fila);
                 }
@@ -117,7 +125,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Cantidad", "Valor Productos"
+                "Producto", "Cantidad", "Valor"
             }
         ));
         jScrollPane1.setViewportView(tblDetalle);
@@ -169,9 +177,9 @@ public class frmDetalleVend extends javax.swing.JFrame {
         lblEst.setBounds(110, 180, 47, 17);
 
         lblNomCli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNomCli.setText("Nombre cliente:");
+        lblNomCli.setText("Cliente:");
         jPanel1.add(lblNomCli);
-        lblNomCli.setBounds(60, 150, 320, 17);
+        lblNomCli.setBounds(110, 150, 260, 17);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 900, 580);
@@ -180,7 +188,7 @@ public class frmDetalleVend extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
-        // TODO add your handling code here:
+    this.llamarRegresar();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegActionPerformed
 
     /**

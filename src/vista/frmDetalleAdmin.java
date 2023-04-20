@@ -2,6 +2,7 @@ package vista;
 
 import controlador.clsConexion;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsDetalle;
@@ -31,6 +32,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
     DefaultTableModel tabladatos;
     clsConexion objCon = new clsConexion();
     clsDetalle objDet = new clsDetalle();
+    DecimalFormat formato = new DecimalFormat("#,##0");
  
  
      public void llamarRegresar() {
@@ -40,7 +42,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
     }
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
-        Object modelotitulos[] = {"Producto", "Cantidad", "Valor productos"};
+        Object modelotitulos[] = {"Producto", "Cantidad", "Valor"};
         tabladatos = new DefaultTableModel();
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
         this.tblDetalle.setModel(this.tabladatos);
@@ -70,7 +72,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                     lblNomCli.setText(lblNomCli.getText()+"   " +objDet.datos.getString(3));
                     lblNomVen.setText(lblNomVen.getText()+"   " +objDet.datos.getString(4));
                     cboEst.setSelectedItem(objDet.datos.getString(5));
-                    lblValPed.setText(lblValPed.getText()+"   "+objDet.datos.getString(6));
+                    lblValPed.setText(lblValPed.getText()+"   "+ formato.format(Integer.parseInt(objDet.datos.getString(6))));
                 }else{
                 JOptionPane.showMessageDialog(null, "No se ha podido buscar, lo siento" );
                 }
@@ -78,6 +80,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se ha podido mostrar, lo siento" + ex);
             }
     }
+    
     public void llenarTablaDetalle(){
         try {
                 borrartabla();
@@ -86,7 +89,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                 while (objDet.datos.next() == true) {
                     String Producto = objDet.datos.getString(1);
                     String Cantidad = objDet.datos.getString(2);
-                    String ValorProductos = objDet.datos.getString(3);
+                    String ValorProductos = formato.format(Integer.parseInt(objDet.datos.getString(3)));
                     Object fila[] = {Producto,Cantidad, ValorProductos};
                     tabladatos.addRow(fila);
                 }
@@ -147,7 +150,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Producto", "Cantidad", "Valor Productos"
+                "Producto", "Cantidad", "Valor"
             }
         ));
         jScrollPane1.setViewportView(tblDetalle);
@@ -177,9 +180,9 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         btnReg.setBounds(760, 20, 93, 32);
 
         lblNomVen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNomVen.setText("Nombre vendedor:");
+        lblNomVen.setText("Vendedor:");
         jPanel1.add(lblNomVen);
-        lblNomVen.setBounds(40, 180, 320, 17);
+        lblNomVen.setBounds(90, 180, 320, 17);
 
         lblFec.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFec.setText(" Fecha:");
@@ -213,9 +216,9 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
         lblEst.setBounds(110, 210, 47, 17);
 
         lblNomCli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNomCli.setText("Nombre cliente:");
+        lblNomCli.setText("Cliente:");
         jPanel1.add(lblNomCli);
-        lblNomCli.setBounds(60, 150, 320, 17);
+        lblNomCli.setBounds(110, 150, 280, 17);
 
         lblNumPed1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNumPed1.setText("N° Pedido:");

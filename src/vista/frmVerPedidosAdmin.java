@@ -150,7 +150,7 @@ public String Numero;
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         jLabel1.setText("Pedidos");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(530, 70, 100, 32);
+        jLabel1.setBounds(50, 50, 100, 32);
 
         btnRegresar.setBackground(new java.awt.Color(255, 89, 89));
         btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
