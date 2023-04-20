@@ -5,6 +5,9 @@
  */
 package vista;
 
+import modelo.clsSession;
+import modelo.clsUsuario;
+
 /**
  *
  * @author Sena CSET
@@ -17,10 +20,18 @@ public class frmInicioVendedor extends javax.swing.JFrame {
     public frmInicioVendedor() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.mensajeBienvenida();
     }
+    clsUsuario user = new clsUsuario();
+    frmInicioSesion  form = new frmInicioSesion();
+    
     
     public void mensajeBienvenida(){
-        lblVendedor.setText(lblVendedor.getText()+"  ");
+        
+         clsSession session = clsSession.getInstance();      
+         String data = session.getData();
+   
+        lblVendedor.setText(lblVendedor.getText()+"  "+ data);
     }
     
     public void irConsultarPedido(){
@@ -60,10 +71,10 @@ public class frmInicioVendedor extends javax.swing.JFrame {
         jPanel1.setName("jpanel"); // NOI18N
         jPanel1.setLayout(null);
 
-        lblVendedor.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblVendedor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblVendedor.setText("Bienvenid@ ");
         jPanel1.add(lblVendedor);
-        lblVendedor.setBounds(130, 80, 540, 44);
+        lblVendedor.setBounds(130, 80, 540, 17);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/loupe.png"))); // NOI18N
@@ -126,6 +137,8 @@ public class frmInicioVendedor extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmInicioVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

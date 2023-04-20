@@ -6,6 +6,10 @@
 package vista;
 
 import controlador.clsConexion;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import modelo.clsSession;
+import modelo.clsUsuario;
 
 /**
  *
@@ -18,9 +22,41 @@ public class frmInicioSesion extends javax.swing.JFrame {
      */
     public frmInicioSesion() {
         initComponents();
-       
+       this.login();
+    }
+    
+   clsUsuario user = new clsUsuario();
+   
+   String usuario;
+   
+   public void login(){
+       try{         
+            user.setZona(txtUsuario.getText());
+            user.setContrasena(txtContraseña.getText());
+            user.login();
+            
+            if(user.datos.next() == true){
+               
+                usuario = user.datos.getString(1);
+                
+                clsSession session = clsSession.getInstance();
+                session.setData(usuario);
+                JOptionPane.showMessageDialog(null, "Usuario autenticado");
+                this.irPedidos();
+            }
+
+       }catch(SQLException e){
+           
+       }
+    
     }
    
+   public void irPedidos(){
+       frmInicioVendedor inicio = new frmInicioVendedor();
+       inicio.setVisible(true);
+       this.setVisible(false);
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +85,11 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
         btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,6 +138,11 @@ public class frmInicioSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+    
+        this.login();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -122,6 +168,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(frmInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
