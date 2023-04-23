@@ -230,20 +230,17 @@ public void agregarFila() {
       
             //me traigo el id del pedido que acaba de crearse
             create.EncontrarUltimoIdPedido();
-            while(!create.datos.next()){
-                create.setId(create.datos.getString(1));
-                System.out.println("resp sql  max --> " + create.datos.getString(1));
-            }
+
             String id_order = create.getId();
             System.out.println("id_order --> " + id_order);
             // se inserta en el detalle del producto
             
              for (clsProducto producto : productos) {
                  
-                detalle.insertarDetallePedido("44",producto.getId(),producto.getCantidad(),producto.getPrecio(),producto.getTotal());
-               
+                detalle.insertarDetallePedido(id_order,producto.getId(),producto.getCantidad(),producto.getPrecio(),producto.getTotal());
             }
-        }catch (SQLException e){
+            this.llamarRegresar();
+        }catch (Exception e){
           System.out.println("error --> " + e);
         }   
     }
@@ -450,7 +447,6 @@ public void agregarFila() {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         this.crearPedido();
-        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMarcaActionPerformed

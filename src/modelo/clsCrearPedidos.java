@@ -9,7 +9,6 @@ import controlador.clsConexion;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 /**
  *
  * @author Sena CSET
@@ -175,7 +174,7 @@ public class clsCrearPedidos {
                                                 "	ON cl.id = od.id_client order by od.id asc");
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet(); 
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
     
@@ -200,7 +199,7 @@ public class clsCrearPedidos {
             objCon.sql.setString(1,data);
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet(); 
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
     
@@ -244,15 +243,15 @@ public class clsCrearPedidos {
         try {
             objCon.conectar();
              objCon.sql=objCon.con.prepareStatement("INSERT INTO udemy_delivery.orders\n" +
-                                                        "(id_user,\n" +
-                                                        "id_client,\n" +
-                                                        "quantitytotal,\n" +
-                                                        "total,\n" +
-                                                        "status,\n" +
-                                                        "timestamp,\n" +
-                                                        "created_at,\n" +
-                                                        "updated_at)\n" +
-                                                        "VALUES\n" +
+                                                        "(id_user," +
+                                                        "id_client," +
+                                                        "quantitytotal," +
+                                                        "total," +
+                                                        "status," +
+                                                        "timestamp," +
+                                                        "created_at," +
+                                                        "updated_at)" +
+                                                        "VALUES" +
                                                         "(?,?,?,?,'PENDIENTE',167448022,'2023-04-19','2023-04-19');");
      
             objCon.sql.setString(1, id_usuario);
@@ -261,7 +260,7 @@ public class clsCrearPedidos {
             objCon.sql.setDouble(4, 10000);
             //objCon.sql.setString(5, getEmail());
             objCon.sql.executeUpdate();
-           // datos = objCon.sql.getResultSet(); 
+            datos = objCon.sql.getResultSet(); 
             
         } catch (SQLException e) {
             System.out.println("excepcion --> " + e);
@@ -323,6 +322,10 @@ public class clsCrearPedidos {
             objCon.sql=objCon.con.prepareStatement("SELECT max(id) FROM udemy_delivery.orders;");
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet(); 
+            if(datos.next()){
+            setId(datos.getString(1));
+            System.out.println("resp sql  max --> " + datos.getString(1));
+            }// Asignar el valor del último ID de pedido
         } catch (SQLException e) {
             System.out.println("eerr -->" + e);
         }

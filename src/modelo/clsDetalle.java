@@ -158,17 +158,16 @@ public class clsDetalle {
                 System.out.println("Total del producto: " + total);
         try {
             objCon.conectar();
-             objCon.sql=objCon.con.prepareStatement("INSERT INTO\n" +
-                                            "        udemy_delivery.order_has_products(\n" +
-                                            "            id_order,\n" +
-                                            "            id_product,\n" +
-                                            "            quantity,\n" +
-                                            "            price_unit,\n" +
-                                            "            total,\n" +
-                                            "            created_at,\n" +
-                                            "            updated_at   \n" +
-                                            "        )\n" +
-                                            "    VALUES(?, ?, ?, ?, ?, '2023-04-19', '2023-04-19')");
+             objCon.sql=objCon.con.prepareStatement("INSERT INTO " +
+                                            "udemy_delivery.order_has_products " +
+                                            "(id_order," +
+                                            "id_product," +
+                                            "quantity," +
+                                            "price_unit," +
+                                            "total," +
+                                            "created_at," +
+                                            "updated_at)  " +
+                                            "VALUES(?, ?, ?, ?, ?, '2023-04-19', '2023-04-19')");
      
             objCon.sql.setString(1, id_order);
             objCon.sql.setString(2, id_product);
@@ -176,9 +175,7 @@ public class clsDetalle {
             objCon.sql.setDouble(4, precio);
             objCon.sql.setDouble(5, total);
             //objCon.sql.setString(5, getEmail());
-            objCon.sql.executeUpdate();
-           // datos = objCon.sql.getResultSet(); 
-            
+            objCon.sql.executeUpdate(); 
         } catch (SQLException e) {
             System.out.println("excepcion --> " + e);
         }

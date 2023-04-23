@@ -87,6 +87,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(970, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setToolTipText("");
         jPanel1.setLayout(null);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo sena (3).png"))); // NOI18N
@@ -101,6 +102,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
         txtUsuario.setText("                    Zona");
+        txtUsuario.setToolTipText("");
         txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
         jPanel1.add(txtUsuario);
         txtUsuario.setBounds(400, 260, 180, 30);
