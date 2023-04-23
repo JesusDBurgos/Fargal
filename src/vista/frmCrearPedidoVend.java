@@ -7,10 +7,13 @@ package vista;
 
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsCrearPedidos;
+import modelo.clsDetalle;
+import modelo.clsProducto;
 
 /**
  *
@@ -28,7 +31,12 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
         this.llenarCliente();
 
     }
+   
     clsCrearPedidos create = new clsCrearPedidos();
+    clsDetalle detalle = new clsDetalle();
+    
+    ArrayList<clsProducto> productos = new ArrayList<clsProducto>();
+    
     private int cantidadProducto;
     NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
     String id_product;
@@ -69,6 +77,8 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     }
     
 public void agregarFila() {
+    
+    
     boolean validacion = true;
     if (cboMarca.getSelectedIndex() == 0) {
         JOptionPane.showMessageDialog(null, "Seleccione una marca");
@@ -84,30 +94,62 @@ public void agregarFila() {
     }
     if (validacion) {
         try {
-            //this.borrartabla();
+          
            
             create.setProductoSelecccionado(cboProducto.getSelectedItem().toString());
-            create.Buscar_Id_Precio_Product();
+            create.setCliente(cboCliente.getSelectedItem().toString());
             
+            //busco el ID del cliente
+            create.EncontrarIdClienteSeleccionado();
             while (create.datos.next() == true) {
-                 cantidadProducto = Integer.parseInt(spnCantidad.getValue().toString());
-            String precioUnitario = format.format(create.datos.getDouble(3));
-            String precioTotal = format.format(create.datos.getDouble(3) * cantidadProducto);
+                create.setId_cliente(create.datos.getString(1));//Setear id_cliente
+            }
+            
+            //Busco el ID y precio del producto
+            create.Buscar_Id_Precio_Product();            
+            while (create.datos.next() == true) {
+                
+                cantidadProducto = Integer.parseInt(spnCantidad.getValue().toString());
+                String precioUnitario = format.format(create.datos.getDouble(3));
+                String precioTotal = format.format(create.datos.getDouble(3) * cantidadProducto);
+                
                 Object[] fila = new Object[5];
                 fila[0] = create.datos.getString(1);
                 fila[1] = cboProducto.getSelectedItem().toString();
                 fila[2] = spnCantidad.getValue().toString();
-                fila[3] =  precioUnitario;
+                fila[3] = precioUnitario;
                 fila[4] = precioTotal;
                 tabladatos.addRow(fila);
+                
+                productos.add(new clsProducto(create.datos.getString(1),
+                        cboProducto.getSelectedItem().toString(),
+                        create.datos.getDouble(3),
+                        cantidadProducto,
+                        create.datos.getDouble(3) * cantidadProducto));
             }
             limpiar();
+             //System.out.print(create.getProductoSelecccionado());
+             
+             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se ha podido mostrar, lo siento" + e);
         }
     }
+    
+    
 }
 
+    public void listarProductos(){
+        ArrayList<clsProducto> productos = new ArrayList<clsProducto>();
+        
+        for (clsProducto producto : productos) {
+                System.out.println("id del producto: " + producto.getId());
+                System.out.println("Nombre del producto: " + producto.getNombre());
+                System.out.println("Precio del producto: " + producto.getPrecio());
+                System.out.println("Cantidad del producto: " + producto.getCantidad());
+                System.out.println("Total del producto: " + producto.getTotal());
+            }
+    }
     public void borrarFila() {
         int a = tblProductos.getSelectedRow();
         if (a < 0) {
@@ -149,13 +191,18 @@ public void agregarFila() {
             JOptionPane.showMessageDialog(null, "error " + e);
         }
     }
+    
 
     public void llenarCliente() {
         try {
+          
+            
             // create.setMarca(cboMarca.getSelectedItem().toString());
             create.VerClientesXVendedor();
             while (create.datos.next() == true) {
+                
                 cboCliente.addItem(create.datos.getString(2));
+               
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "error " + e);
@@ -174,6 +221,31 @@ public void agregarFila() {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "error " + e);
         }
+    }
+    
+    public void crearPedido (){
+        try{
+            //se crea el pedido
+            create.crearPedido();
+      
+            //me traigo el id del pedido que acaba de crearse
+            create.EncontrarUltimoIdPedido();
+            while(!create.datos.next()){
+                create.setId(create.datos.getString(1));
+                System.out.println("resp sql  max --> " + create.datos.getString(1));
+            }
+            String id_order = create.getId();
+            System.out.println("id_order --> " + id_order);
+            // se inserta en el detalle del producto
+            
+             for (clsProducto producto : productos) {
+                 
+                detalle.insertarDetallePedido("44",producto.getId(),producto.getCantidad(),producto.getPrecio(),producto.getTotal());
+               
+            }
+        }catch (SQLException e){
+          System.out.println("error --> " + e);
+        }   
     }
 
     /**
@@ -223,6 +295,11 @@ public void agregarFila() {
         jLabel2.setBounds(46, 122, 49, 17);
 
         cboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
+        cboCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboClienteActionPerformed(evt);
+            }
+        });
         jPanel1.add(cboCliente);
         cboCliente.setBounds(126, 122, 122, 22);
 
@@ -372,7 +449,8 @@ public void agregarFila() {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        this.crearPedido();
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void cboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMarcaActionPerformed
@@ -396,6 +474,10 @@ public void agregarFila() {
             this.llenarProducto();
         }
     }//GEN-LAST:event_cboMarcaItemStateChanged
+
+    private void cboClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboClienteActionPerformed
 
     /**
      * @param args the command line arguments

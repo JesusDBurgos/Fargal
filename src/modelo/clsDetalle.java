@@ -18,7 +18,52 @@ public class clsDetalle {
     //Declaracion de variables
     private String tokenUser;
     private String order;
+
+    public String getId_order() {
+        return id_order;
+    }
+
+    public void setId_order(String id_order) {
+        this.id_order = id_order;
+    }
+
+    public String getId_product() {
+        return id_product;
+    }
+
+    public void setId_product(String id_product) {
+        this.id_product = id_product;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPrice_unit() {
+        return price_unit;
+    }
+
+    public void setPrice_unit(String price_unit) {
+        this.price_unit = price_unit;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
     private String estado;
+    private String id_order;
+    private String id_product;
+    private String quantity;
+    private String price_unit;
+    private String total;
     public ResultSet datos;
     clsConexion objCon = new clsConexion();
     //Encapsulacion
@@ -52,7 +97,18 @@ public class clsDetalle {
     public void llenarDatosDetalle(){
          try {
             objCon.conectar();
-            objCon.sql=objCon.con.prepareStatement("SELECT orders.id, orders.updated_at, clients.name, users.name, orders.status, orders.total FROM orders INNER JOIN clients ON orders.id_client = clients.id INNER JOIN users ON orders.id_user = users.id WHERE orders.id = ?");
+            objCon.sql=objCon.con.prepareStatement("SELECT orders.id,"
+                                                + " orders.updated_at, "
+                                                + " clients.name,"
+                                                + " users.name,"
+                                                + " orders.status,"
+                                                + " orders.total "
+                                                + "FROM orders"
+                                                + " INNER JOIN clients "
+                                                + "ON orders.id_client = clients.id "
+                                                + "INNER JOIN users"
+                                                + " ON orders.id_user = users.id "
+                                                + "WHERE orders.id = ?");
             objCon.sql.setString(1, getOrder());
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet();
@@ -63,7 +119,13 @@ public class clsDetalle {
     public void llenarTablaDetalle(){
         try {
             objCon.conectar();
-            objCon.sql=objCon.con.prepareStatement("select products.name,order_has_products.quantity,order_has_products.total from order_has_products INNER JOIN products ON order_has_products.id_product=products.id and id_order=?");
+            objCon.sql=objCon.con.prepareStatement("select products.name,"
+                                                + "order_has_products.quantity,"
+                                                + "order_has_products.total"
+                                                + "from order_has_products"
+                                                + "INNER JOIN products "
+                                                + "ON order_has_products.id_product = products.id"
+                                                + " and id_order=?");
             objCon.sql.setString(1, getOrder());
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet();
@@ -83,5 +145,44 @@ public class clsDetalle {
             JOptionPane.showMessageDialog(null, "Error al actualizar" +  ex);
         }
        
+    }
+    
+     public void insertarDetallePedido(String id_order,String id_product,int cantidad,double precio, double total){
+         //clsCrearPedidos pedido = new clsCrearPedidos();
+         //clsProducto producto = new clsProducto();
+         
+          System.out.println("id del pedido: " + id_order);
+                System.out.println("Id del producto: " + id_product);
+                System.out.println("Cantidad del producto: " + cantidad);
+                System.out.println("Precio del producto: " + precio);
+                System.out.println("Total del producto: " + total);
+        try {
+            objCon.conectar();
+             objCon.sql=objCon.con.prepareStatement("INSERT INTO\n" +
+                                            "        udemy_delivery.order_has_products(\n" +
+                                            "            id_order,\n" +
+                                            "            id_product,\n" +
+                                            "            quantity,\n" +
+                                            "            price_unit,\n" +
+                                            "            total,\n" +
+                                            "            created_at,\n" +
+                                            "            updated_at   \n" +
+                                            "        )\n" +
+                                            "    VALUES(?, ?, ?, ?, ?, '2023-04-19', '2023-04-19')");
+     
+            objCon.sql.setString(1, id_order);
+            objCon.sql.setString(2, id_product);
+            objCon.sql.setInt(3, cantidad);
+            objCon.sql.setDouble(4, precio);
+            objCon.sql.setDouble(5, total);
+            //objCon.sql.setString(5, getEmail());
+            objCon.sql.executeUpdate();
+           // datos = objCon.sql.getResultSet(); 
+            
+        } catch (SQLException e) {
+            System.out.println("excepcion --> " + e);
+        }
+        
+        
     }
 }

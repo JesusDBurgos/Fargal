@@ -15,7 +15,9 @@ import java.sql.SQLException;
  * @author Sena CSET
  */
 public class clsCrearPedidos {
-    //variables
+
+   
+    private String id;
     private String numeroPedido;
     private String id_vendedor;
     private String vendedor;
@@ -34,6 +36,7 @@ public class clsCrearPedidos {
     public void setProductoSelecccionado(String productoSelecccionado) {
         this.productoSelecccionado = productoSelecccionado;
     }
+    
     private String productoSelecccionado;
     private Array producto;
     
@@ -139,12 +142,20 @@ public class clsCrearPedidos {
     public void setData(String data) {
         this.data = data;
     }
-    
+     public String getId() {
+        return id;
+    }
+
+    //variables
+    public void setId(String id) {
+        this.id = id;
+    }
     
     //metodos
     
     clsSession session = clsSession.getInstance();      
     String data = session.getData();
+    String id_usuario = session.getId_usuario();
     
     public void VerPedidosAdmin(){
         try {
@@ -228,6 +239,38 @@ public class clsCrearPedidos {
         }
     }
     
+    public void crearPedido(){
+         
+        try {
+            objCon.conectar();
+             objCon.sql=objCon.con.prepareStatement("INSERT INTO udemy_delivery.orders\n" +
+                                                        "(id_user,\n" +
+                                                        "id_client,\n" +
+                                                        "quantitytotal,\n" +
+                                                        "total,\n" +
+                                                        "status,\n" +
+                                                        "timestamp,\n" +
+                                                        "created_at,\n" +
+                                                        "updated_at)\n" +
+                                                        "VALUES\n" +
+                                                        "(?,?,?,?,'PENDIENTE',167448022,'2023-04-19','2023-04-19');");
+     
+            objCon.sql.setString(1, id_usuario);
+            objCon.sql.setString(2, getId_cliente());
+            objCon.sql.setInt(3, 2);
+            objCon.sql.setDouble(4, 10000);
+            //objCon.sql.setString(5, getEmail());
+            objCon.sql.executeUpdate();
+           // datos = objCon.sql.getResultSet(); 
+            
+        } catch (SQLException e) {
+            System.out.println("excepcion --> " + e);
+        }
+
+    }
+    
+   
+    
     public void VerClientesXVendedor(){
         
          clsSession session = clsSession.getInstance();      
@@ -247,6 +290,41 @@ public class clsCrearPedidos {
             objCon.sql.executeQuery();
             datos = objCon.sql.getResultSet(); 
         } catch (SQLException e) {
+        }
+    }
+    
+    public void EncontrarIdClienteSeleccionado(){
+        
+         clsSession session = clsSession.getInstance();      
+         String data = session.getData();
+         String id_usuario = session.getId_usuario();
+             
+        try {
+            objCon.conectar();
+             objCon.sql=objCon.con.prepareStatement("SELECT \n" +
+                                                    "	 id,\n" +
+                                                    "	 name,\n" +
+                                                    "	 id_user\n" +
+                                                    " FROM udemy_delivery.clients\n" +
+                                                    " WHERE id_user = ? and name = ?");
+            objCon.sql.setString(1,id_usuario);
+            objCon.sql.setString(2,getCliente());
+            
+            objCon.sql.executeQuery();
+            datos = objCon.sql.getResultSet(); 
+        } catch (SQLException e) {
+        }
+    }
+    
+    public void EncontrarUltimoIdPedido(){
+             System.out.println("entro al max -->" );
+        try {
+            objCon.conectar();
+            objCon.sql=objCon.con.prepareStatement("SELECT max(id) FROM udemy_delivery.orders;");
+            objCon.sql.executeQuery();
+            datos = objCon.sql.getResultSet(); 
+        } catch (SQLException e) {
+            System.out.println("eerr -->" + e);
         }
     }
 }
