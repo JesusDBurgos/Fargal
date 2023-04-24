@@ -9,6 +9,7 @@ import controlador.clsConexion;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Sena CSET
@@ -261,6 +262,7 @@ public class clsCrearPedidos {
             //objCon.sql.setString(5, getEmail());
             objCon.sql.executeUpdate();
             datos = objCon.sql.getResultSet(); 
+            JOptionPane.showMessageDialog(null,"Se ha creado el pedido");
             
         } catch (SQLException e) {
             System.out.println("excepcion --> " + e);

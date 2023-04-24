@@ -119,12 +119,12 @@ public class clsDetalle {
     public void llenarTablaDetalle(){
         try {
             objCon.conectar();
-            objCon.sql=objCon.con.prepareStatement("select products.name,"
-                                                + "order_has_products.quantity,"
-                                                + "order_has_products.total"
-                                                + "from order_has_products"
+            objCon.sql=objCon.con.prepareStatement("select products.name, "
+                                                + "order_has_products.quantity, "
+                                                + "order_has_products.total "
+                                                + "from order_has_products "
                                                 + "INNER JOIN products "
-                                                + "ON order_has_products.id_product = products.id"
+                                                + "ON order_has_products.id_product = products.id "
                                                 + " and id_order=?");
             objCon.sql.setString(1, getOrder());
             objCon.sql.executeQuery();
