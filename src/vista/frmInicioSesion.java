@@ -95,13 +95,15 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jLabel4.setBounds(310, 80, 360, 110);
 
         txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
-        txtContraseña.setText("              Contraseña");
+        txtContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtContraseña.setText("Contraseña");
         txtContraseña.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
         jPanel1.add(txtContraseña);
         txtContraseña.setBounds(400, 300, 180, 30);
 
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        txtUsuario.setText("                    Zona");
+        txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtUsuario.setText("Zona");
         txtUsuario.setToolTipText("");
         txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
         jPanel1.add(txtUsuario);

@@ -6,6 +6,8 @@
 package vista;
 
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsVerPedidos;
@@ -27,6 +29,7 @@ public class frmVerPedidosAdmin extends javax.swing.JFrame {
     }
     clsVerPedidos objVp = new clsVerPedidos();
      frmDetalleAdmin objDet = new frmDetalleAdmin();
+    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
     DefaultTableModel tabladatos;
 public String Numero;
 
@@ -44,7 +47,7 @@ public String Numero;
 
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
-        Object modelotitulos[] = {"Pedido", "Vendedor", "Cliente", "Cantidad", "Precio Total", "Estado", " Fecha"};
+        Object modelotitulos[] = {"Pedido", "Vendedor", "Cliente", "Cantidad", "Valor Total", "Estado", " Fecha"};
         tabladatos = new DefaultTableModel();
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
 
@@ -69,7 +72,7 @@ public String Numero;
                 String Vendedor = objVp.datos.getString(3);
                 String Cliente = objVp.datos.getString(4);
                 String Cantidad = objVp.datos.getString(2);
-                String Precio = objVp.datos.getString(5);
+                String Precio = format.format(Double.parseDouble((objVp.datos.getString(5))));
                 String Estado = objVp.datos.getString(6);
                 String Fecha = objVp.datos.getString(7);
 
@@ -126,7 +129,7 @@ public String Numero;
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "N pedido", "Vendedor", "Cliente", "Cantidad", "Precio  Total", "Estado", "Fecha"
+                "N pedido", "Vendedor", "Cliente", "Cantidad", "Valor Total", "Estado", "Fecha"
             }
         ) {
             boolean[] canEdit = new boolean [] {

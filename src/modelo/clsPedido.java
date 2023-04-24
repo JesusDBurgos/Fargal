@@ -23,8 +23,8 @@ public class clsPedido {
     private String vendedor;
     private String id_cliente;
     private String cliente;
-    private String cantidad;
-    private String precioTotal;
+    private int cantidad;
+    private int precioTotal;
     private String estado;
     private String fecha;
     private String marca;
@@ -71,19 +71,19 @@ public class clsPedido {
         this.cliente = cliente;
     }
 
-    public String getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
-    public String getPrecioTotal() {
+    public int getPrecioTotal() {
         return precioTotal;
     }
 
-    public void setPrecioTotal(String precioTotal) {
+    public void setPrecioTotal(int precioTotal) {
         this.precioTotal = precioTotal;
     }
 
@@ -257,9 +257,8 @@ public class clsPedido {
      
             objCon.sql.setString(1, id_usuario);
             objCon.sql.setString(2, getId_cliente());
-            objCon.sql.setInt(3, 2);
-            objCon.sql.setDouble(4, 10000);
-            //objCon.sql.setString(5, getEmail());
+            objCon.sql.setInt(3, getCantidad());
+            objCon.sql.setInt(4, getPrecioTotal());
             objCon.sql.executeUpdate();
             datos = objCon.sql.getResultSet(); 
             JOptionPane.showMessageDialog(null,"Se ha creado el pedido");

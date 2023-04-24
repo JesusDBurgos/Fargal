@@ -78,7 +78,7 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "N pedido", "Cliente", "Cantidad", "Precio  Total", "Estado", "Fecha", "Ver detalle"
+                "N pedido", "Cliente", "Cantidad", "Valor Total", "Estado", "Fecha", "Ver detalle"
             }
         ) {
             boolean[] canEdit = new boolean [] {

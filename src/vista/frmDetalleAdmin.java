@@ -2,7 +2,8 @@ package vista;
 
 import controlador.clsConexion;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.clsDetalle;
@@ -32,7 +33,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
     DefaultTableModel tabladatos;
     clsConexion objCon = new clsConexion();
     clsDetalle objDet = new clsDetalle();
-    DecimalFormat formato = new DecimalFormat("#,##0");
+    NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
  
  
      public void llamarRegresar() {
@@ -72,7 +73,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                     lblNomCli.setText(lblNomCli.getText()+"   " +objDet.datos.getString(3));
                     lblNomVen.setText(lblNomVen.getText()+"   " +objDet.datos.getString(4));
                     cboEst.setSelectedItem(objDet.datos.getString(5));
-                    lblValPed.setText(lblValPed.getText()+"   "+ formato.format(Integer.parseInt(objDet.datos.getString(6))));
+                    lblValPed.setText(lblValPed.getText()+"   "+ format.format(Double.parseDouble(objDet.datos.getString(6))));
                 }else{
                 JOptionPane.showMessageDialog(null, "No se ha podido buscar, lo siento" );
                 }
@@ -89,7 +90,7 @@ public class frmDetalleAdmin extends javax.swing.JFrame {
                 while (objDet.datos.next() == true) {
                     String Producto = objDet.datos.getString(1);
                     String Cantidad = objDet.datos.getString(2);
-                    String ValorProductos = formato.format(Integer.parseInt(objDet.datos.getString(3)));
+                    String ValorProductos = format.format(Double.parseDouble(objDet.datos.getString(3)));
                     Object fila[] = {Producto,Cantidad, ValorProductos};
                     tabladatos.addRow(fila);
                 }

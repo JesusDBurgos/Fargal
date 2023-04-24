@@ -106,27 +106,37 @@ public void agregarFila() {
             }
             
             //Busco el ID y precio del producto
-            create.Buscar_Id_Precio_Product();            
+            create.Buscar_Id_Precio_Product();  
+            int quantityTotal = 0;
+            int total = 0;
             while (create.datos.next() == true) {
                 
                 cantidadProducto = Integer.parseInt(spnCantidad.getValue().toString());
-                String precioUnitario = format.format(create.datos.getDouble(3));
-                String precioTotal = format.format(create.datos.getDouble(3) * cantidadProducto);
+                String precioUnitario = format.format(create.datos.getInt(3));
+                String precioTotal = format.format(create.datos.getInt(3) * cantidadProducto);
+                
+                
                 
                 Object[] fila = new Object[5];
                 fila[0] = create.datos.getString(1);
                 fila[1] = cboProducto.getSelectedItem().toString();
-                fila[2] = spnCantidad.getValue().toString();
+                fila[2] = spnCantidad.getValue();
                 fila[3] = precioUnitario;
                 fila[4] = precioTotal;
                 tabladatos.addRow(fila);
                 
                 productos.add(new clsProducto(create.datos.getString(1),
                         cboProducto.getSelectedItem().toString(),
-                        create.datos.getDouble(3),
+                        create.datos.getInt(3),
                         cantidadProducto,
-                        create.datos.getDouble(3) * cantidadProducto));
-            }
+                        create.datos.getInt(3) * cantidadProducto));
+                quantityTotal += cantidadProducto;
+                total += create.datos.getInt(3) * cantidadProducto;
+                
+                create.setCantidad(quantityTotal); //SetCantidad
+                create.setPrecioTotal(total); //SetTotal
+            } 
+
             limpiar();
              //System.out.print(create.getProductoSelecccionado());
              
@@ -268,11 +278,9 @@ public void agregarFila() {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         spnCantidad = new javax.swing.JSpinner();
         btnRegresar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         lblNumeroPedido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -298,23 +306,23 @@ public void agregarFila() {
             }
         });
         jPanel1.add(cboCliente);
-        cboCliente.setBounds(126, 122, 122, 22);
+        cboCliente.setBounds(126, 122, 190, 20);
 
         jLabel3.setText("Nuevo Producto :");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(85, 180, 100, 16);
+        jLabel3.setBounds(85, 180, 100, 14);
 
         jLabel4.setText("Marca :");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(180, 210, 50, 16);
+        jLabel4.setBounds(160, 210, 50, 14);
 
         jLabel5.setText("Producto :");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(370, 210, 60, 16);
+        jLabel5.setBounds(370, 210, 60, 14);
 
         jLabel6.setText("Cantidad :");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(580, 210, 60, 16);
+        jLabel6.setBounds(610, 210, 60, 14);
 
         cboMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "NARBATT", "PIONEIRO" }));
         cboMarca.addItemListener(new java.awt.event.ItemListener() {
@@ -328,11 +336,11 @@ public void agregarFila() {
             }
         });
         jPanel1.add(cboMarca);
-        cboMarca.setBounds(240, 210, 110, 22);
+        cboMarca.setBounds(210, 210, 140, 20);
 
         cboProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar..." }));
         jPanel1.add(cboProducto);
-        cboProducto.setBounds(440, 210, 110, 22);
+        cboProducto.setBounds(440, 210, 150, 20);
 
         btnAñadir.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         btnAñadir.setForeground(new java.awt.Color(58, 155, 220));
@@ -381,13 +389,9 @@ public void agregarFila() {
         jPanel1.add(btnGuardar);
         btnGuardar.setBounds(860, 600, 140, 32);
 
-        jLabel7.setText("Precio");
-        jPanel1.add(jLabel7);
-        jLabel7.setBounds(730, 210, 107, 17);
-
         spnCantidad.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jPanel1.add(spnCantidad);
-        spnCantidad.setBounds(650, 210, 59, 24);
+        spnCantidad.setBounds(680, 210, 59, 24);
 
         btnRegresar.setBackground(new java.awt.Color(255, 89, 89));
         btnRegresar.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -399,7 +403,7 @@ public void agregarFila() {
             }
         });
         jPanel1.add(btnRegresar);
-        btnRegresar.setBounds(930, 30, 90, 32);
+        btnRegresar.setBounds(930, 30, 93, 32);
 
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 0, 51));
@@ -411,10 +415,6 @@ public void agregarFila() {
         });
         jPanel1.add(btnEliminar);
         btnEliminar.setBounds(940, 200, 60, 35);
-
-        jLabel8.setText("N° Pedido :");
-        jPanel1.add(jLabel8);
-        jLabel8.setBounds(427, 125, 180, 16);
         jPanel1.add(lblNumeroPedido);
         lblNumeroPedido.setBounds(487, 122, 62, 20);
 
@@ -524,8 +524,6 @@ public void agregarFila() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumeroPedido;
