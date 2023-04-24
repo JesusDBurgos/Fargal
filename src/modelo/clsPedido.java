@@ -257,8 +257,8 @@ public class clsPedido {
      
             objCon.sql.setString(1, id_usuario);
             objCon.sql.setString(2, getId_cliente());
-            objCon.sql.setInt(3, getCantidad());
-            objCon.sql.setInt(4, getPrecioTotal());
+            objCon.sql.setInt(3, 3);
+            objCon.sql.setInt(4, 250000);
             objCon.sql.executeUpdate();
             datos = objCon.sql.getResultSet(); 
             JOptionPane.showMessageDialog(null,"Se ha creado el pedido");

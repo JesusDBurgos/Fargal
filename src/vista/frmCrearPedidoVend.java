@@ -75,7 +75,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
             this.creartabla();
         }
     }
-    
+      
 public void agregarFila() {
     
     
@@ -104,19 +104,14 @@ public void agregarFila() {
             while (create.datos.next() == true) {
                 create.setId_cliente(create.datos.getString(1));//Setear id_cliente
             }
-            
             //Busco el ID y precio del producto
-            create.Buscar_Id_Precio_Product();  
-            int quantityTotal = 0;
-            int total = 0;
+            create.Buscar_Id_Precio_Product();
             while (create.datos.next() == true) {
                 
                 cantidadProducto = Integer.parseInt(spnCantidad.getValue().toString());
                 String precioUnitario = format.format(create.datos.getInt(3));
-                String precioTotal = format.format(create.datos.getInt(3) * cantidadProducto);
-                
-                
-                
+                int precioTotal = create.datos.getInt(3) * cantidadProducto;
+
                 Object[] fila = new Object[5];
                 fila[0] = create.datos.getString(1);
                 fila[1] = cboProducto.getSelectedItem().toString();
@@ -130,13 +125,8 @@ public void agregarFila() {
                         create.datos.getInt(3),
                         cantidadProducto,
                         create.datos.getInt(3) * cantidadProducto));
-                quantityTotal += cantidadProducto;
-                total += create.datos.getInt(3) * cantidadProducto;
+            }
                 
-                create.setCantidad(quantityTotal); //SetCantidad
-                create.setPrecioTotal(total); //SetTotal
-            } 
-
             limpiar();
              //System.out.print(create.getProductoSelecccionado());
              
@@ -282,6 +272,7 @@ public void agregarFila() {
         btnRegresar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         lblNumeroPedido = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1051, 663));
@@ -417,6 +408,8 @@ public void agregarFila() {
         btnEliminar.setBounds(940, 200, 60, 35);
         jPanel1.add(lblNumeroPedido);
         lblNumeroPedido.setBounds(487, 122, 62, 20);
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(940, 370, 70, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -524,6 +517,7 @@ public void agregarFila() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumeroPedido;
