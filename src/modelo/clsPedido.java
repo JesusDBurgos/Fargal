@@ -257,10 +257,10 @@ public class clsPedido {
      
             objCon.sql.setString(1, id_usuario);
             objCon.sql.setString(2, getId_cliente());
-            objCon.sql.setInt(3, 3);
-            objCon.sql.setInt(4, 250000);
+            objCon.sql.setInt(3, cantidad);
+            objCon.sql.setInt(4, precioTotal);
             objCon.sql.executeUpdate();
-            datos = objCon.sql.getResultSet(); 
+            datos = objCon.sql.getResultSet();
             JOptionPane.showMessageDialog(null,"Se ha creado el pedido");
             
         } catch (SQLException e) {
@@ -269,7 +269,49 @@ public class clsPedido {
 
     }
     
-   
+   public int getCantidadProductos(String idPedido) {
+    int cantidad1 = 0;
+
+    try {
+        objCon.conectar();
+        objCon.sql = objCon.con.prepareStatement("SELECT SUM(quantity) FROM order_has_products WHERE id_order = ?");
+        objCon.sql.setString(1, idPedido);
+        datos = objCon.sql.executeQuery();
+
+        if (datos.next()) {
+            cantidad1 = datos.getInt(1);
+        }
+
+        objCon.sql.close();
+        objCon.con.close();
+    } catch (SQLException e) {
+        System.out.println("excepcion --> " + e);
+    }
+
+    return cantidad1;
+}
+
+public int getPrecioTotal(String idPedido) {
+    int precioTotal1 = 0;
+
+    try {
+        objCon.conectar();
+        objCon.sql = objCon.con.prepareStatement("SELECT SUM(total) FROM order_has_products WHERE id_order = ?");
+        objCon.sql.setString(1, idPedido);
+        datos = objCon.sql.executeQuery();
+
+        if (datos.next()) {
+            precioTotal1 = datos.getInt(1);
+        }
+
+        objCon.sql.close();
+        objCon.con.close();
+    } catch (SQLException e) {
+        System.out.println("excepcion --> " + e);
+    }
+
+    return precioTotal1;
+}
     
     public void VerClientesXVendedor(){
         

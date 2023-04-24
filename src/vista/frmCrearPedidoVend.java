@@ -5,6 +5,7 @@
  */
 package vista;
 
+import controlador.clsConexion;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
    
     clsPedido create = new clsPedido();
     clsDetalle detalle = new clsDetalle();
+    clsConexion objCon =new clsConexion();
     
     ArrayList<clsProducto> productos = new ArrayList<clsProducto>();
     
@@ -110,7 +112,7 @@ public void agregarFila() {
                 
                 cantidadProducto = Integer.parseInt(spnCantidad.getValue().toString());
                 String precioUnitario = format.format(create.datos.getInt(3));
-                int precioTotal = create.datos.getInt(3) * cantidadProducto;
+                String precioTotal = format.format(create.datos.getInt(3) * cantidadProducto);
 
                 Object[] fila = new Object[5];
                 fila[0] = create.datos.getString(1);
@@ -225,13 +227,13 @@ public void agregarFila() {
     
     public void crearPedido (){
         try{
+
             //se crea el pedido
             create.crearPedido();
-      
             //me traigo el id del pedido que acaba de crearse
             create.EncontrarUltimoIdPedido();
-
             String id_order = create.getId();
+            
             System.out.println("id_order --> " + id_order);
             // se inserta en el detalle del producto
             
@@ -239,8 +241,17 @@ public void agregarFila() {
                  
                 detalle.insertarDetallePedido(id_order,producto.getId(),producto.getCantidad(),producto.getPrecio(),producto.getTotal());
             }
+            int cantidadProductos1 = create.getCantidadProductos(create.getId());
+            double precioTotal1 = create.getPrecioTotal(create.getId());
+            objCon.conectar();
+            objCon.sql = objCon.con.prepareStatement("UPDATE orders SET quantitytotal=?,total=? WHERE id=?;");
+            objCon.sql.setInt(1, cantidadProductos1);
+            objCon.sql.setDouble(2, precioTotal1);
+            objCon.sql.setString(3, create.getId());
+            objCon.sql.executeUpdate();
             this.llamarRegresar();
-        }catch (Exception e){
+            
+        }catch (SQLException e){
           System.out.println("error --> " + e);
         }   
     }
