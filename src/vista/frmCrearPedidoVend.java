@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.clsCrearPedidos;
+import modelo.clsPedido;
 import modelo.clsDetalle;
 import modelo.clsProducto;
 
@@ -32,7 +32,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
     }
    
-    clsCrearPedidos create = new clsCrearPedidos();
+    clsPedido create = new clsPedido();
     clsDetalle detalle = new clsDetalle();
     
     ArrayList<clsProducto> productos = new ArrayList<clsProducto>();

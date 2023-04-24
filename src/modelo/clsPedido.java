@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author Sena CSET
  */
-public class clsCrearPedidos {
+public class clsPedido {
 
    
     private String id;
