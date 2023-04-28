@@ -3,6 +3,8 @@ package vista;
 import controlador.clsConexion;
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

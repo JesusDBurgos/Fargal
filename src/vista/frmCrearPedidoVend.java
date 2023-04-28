@@ -126,7 +126,7 @@ public void agregarFila() {
                         cboProducto.getSelectedItem().toString(),
                         create.datos.getInt(3),
                         cantidadProducto,
-                        create.datos.getInt(3) * cantidadProducto));
+                        create.datos.getInt(3) * cantidadProducto));                
             }
                 
             limpiar();
@@ -160,8 +160,9 @@ public void agregarFila() {
                     "Debe seleccionar una fila de la tabla");
 
         } else {
-            JOptionPane.showMessageDialog(null, "Producto Eliminado");
             tabladatos.removeRow(a);
+            productos.remove(a);
+            JOptionPane.showMessageDialog(null, "Producto Eliminado");
         }
     }
 
@@ -234,7 +235,7 @@ public void agregarFila() {
             create.EncontrarUltimoIdPedido();
             String id_order = create.getId();
             
-            System.out.println("id_order --> " + id_order);
+//            System.out.println("id_order --> " + id_order);
             // se inserta en el detalle del producto
             
              for (clsProducto producto : productos) {

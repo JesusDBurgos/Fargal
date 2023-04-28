@@ -8,6 +8,8 @@ package modelo;
 import controlador.clsConexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -64,8 +66,10 @@ public class clsDetalle {
     private String quantity;
     private String price_unit;
     private String total;
+    private String fecha;
     public ResultSet datos;
     clsConexion objCon = new clsConexion();
+    clsPedido editarEst = new clsPedido();
     //Encapsulacion
 
     public String getTokenUser() {
@@ -84,6 +88,13 @@ public class clsDetalle {
         this.estado = estado;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     public String getOrder() {
         return order;
     }
@@ -98,7 +109,7 @@ public class clsDetalle {
          try {
             objCon.conectar();
             objCon.sql=objCon.con.prepareStatement("SELECT orders.id,"
-                                                + " orders.updated_at, "
+                                                + " orders.created_at,"
                                                 + " clients.name,"
                                                 + " users.name,"
                                                 + " orders.status,"
@@ -137,8 +148,8 @@ public class clsDetalle {
         try {
             objCon.conectar();
             objCon.sql=objCon.con.prepareStatement("UPDATE orders SET orders.status=? WHERE id=?");
-            objCon.sql.setString(2, getOrder());
             objCon.sql.setString(1, getEstado());
+            objCon.sql.setString(2, getOrder());
             objCon.sql.executeUpdate();
             JOptionPane.showMessageDialog(null, "Actualización de estado exitosa");
         } catch (SQLException ex) {

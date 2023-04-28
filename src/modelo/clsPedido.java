@@ -244,7 +244,6 @@ public class clsPedido {
     public void crearPedido(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String fechaPedido = dtf.format(LocalDateTime.now());
-         
         try {
             objCon.conectar();
              objCon.sql=objCon.con.prepareStatement("INSERT INTO udemy_delivery.orders\n" +
@@ -257,7 +256,7 @@ public class clsPedido {
                                                         "created_at," +
                                                         "updated_at)" +
                                                         "VALUES" +
-                                                        "(?,?,?,?,'PENDIENTE',167448022,?,'2023-04-19');");
+                                                        "(?,?,?,?,'PENDIENTE',167448022,?,'2023-04-19 00:00:00');");
      
             objCon.sql.setString(1, id_usuario);
             objCon.sql.setString(2, getId_cliente());
@@ -364,7 +363,6 @@ public int getPrecioTotal(String idPedido) {
     }
     
     public void EncontrarUltimoIdPedido(){
-             System.out.println("entro al max -->" );
         try {
             objCon.conectar();
             objCon.sql=objCon.con.prepareStatement("SELECT max(id) FROM udemy_delivery.orders;");
@@ -372,7 +370,6 @@ public int getPrecioTotal(String idPedido) {
             datos = objCon.sql.getResultSet(); 
             if(datos.next()){
             setId(datos.getString(1));
-            System.out.println("resp sql  max --> " + datos.getString(1));
             }// Asignar el valor del último ID de pedido
         } catch (SQLException e) {
             System.out.println("eerr -->" + e);
