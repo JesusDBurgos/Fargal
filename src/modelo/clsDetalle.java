@@ -150,12 +150,6 @@ public class clsDetalle {
      public void insertarDetallePedido(String id_order,String id_product,int cantidad,double precio, double total){
          //clsCrearPedidos pedido = new clsCrearPedidos();
          //clsProducto producto = new clsProducto();
-         
-          System.out.println("id del pedido: " + id_order);
-                System.out.println("Id del producto: " + id_product);
-                System.out.println("Cantidad del producto: " + cantidad);
-                System.out.println("Precio del producto: " + precio);
-                System.out.println("Total del producto: " + total);
         try {
             objCon.conectar();
              objCon.sql=objCon.con.prepareStatement("INSERT INTO " +

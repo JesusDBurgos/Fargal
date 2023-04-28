@@ -72,7 +72,7 @@ public String Numero;
                 String Vendedor = objVp.datos.getString(3);
                 String Cliente = objVp.datos.getString(4);
                 String Cantidad = objVp.datos.getString(2);
-                String Precio = objVp.datos.getString(5);
+                String Precio = format.format(objVp.datos.getInt(5));
                 String Estado = objVp.datos.getString(6);
                 String Fecha = objVp.datos.getString(7);
 

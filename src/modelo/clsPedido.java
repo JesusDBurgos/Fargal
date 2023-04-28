@@ -9,6 +9,8 @@ import controlador.clsConexion;
 import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 /**
  *
@@ -240,6 +242,8 @@ public class clsPedido {
     }
     
     public void crearPedido(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        String fechaPedido = dtf.format(LocalDateTime.now());
          
         try {
             objCon.conectar();
@@ -253,12 +257,13 @@ public class clsPedido {
                                                         "created_at," +
                                                         "updated_at)" +
                                                         "VALUES" +
-                                                        "(?,?,?,?,'PENDIENTE',167448022,'2023-04-19','2023-04-19');");
+                                                        "(?,?,?,?,'PENDIENTE',167448022,?,'2023-04-19');");
      
             objCon.sql.setString(1, id_usuario);
             objCon.sql.setString(2, getId_cliente());
             objCon.sql.setInt(3, cantidad);
             objCon.sql.setInt(4, precioTotal);
+            objCon.sql.setString(5, fechaPedido);
             objCon.sql.executeUpdate();
             datos = objCon.sql.getResultSet();
             JOptionPane.showMessageDialog(null,"Se ha creado el pedido");
