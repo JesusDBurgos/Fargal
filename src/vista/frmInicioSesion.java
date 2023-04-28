@@ -77,8 +77,8 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtContraseña = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
+        txtContraseña = new javax.swing.JPasswordField();
         btnIngresar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -94,13 +94,6 @@ public class frmInicioSesion extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(310, 80, 360, 110);
 
-        txtContraseña.setForeground(new java.awt.Color(153, 153, 153));
-        txtContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtContraseña.setText("Contraseña");
-        txtContraseña.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
-        jPanel1.add(txtContraseña);
-        txtContraseña.setBounds(400, 300, 180, 30);
-
         txtUsuario.setForeground(new java.awt.Color(153, 153, 153));
         txtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsuario.setText("Zona");
@@ -108,6 +101,11 @@ public class frmInicioSesion extends javax.swing.JFrame {
         txtUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
         jPanel1.add(txtUsuario);
         txtUsuario.setBounds(400, 260, 180, 30);
+
+        txtContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtContraseña.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
+        jPanel1.add(txtContraseña);
+        txtContraseña.setBounds(400, 300, 180, 30);
 
         btnIngresar.setBackground(new java.awt.Color(58, 155, 220));
         btnIngresar.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -213,7 +211,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtContraseña;
+    private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
